@@ -9,6 +9,15 @@ export function ThemeChanger() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme) {
+      setTheme(storedTheme)
+    } else {
+      const isDarkMode = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches
+      setTheme(isDarkMode ? 'dark' : 'light')
+    }
     setMounted(true)
   }, [])
 
